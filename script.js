@@ -246,33 +246,10 @@
   });
   $$(".tile").forEach(spot);
 
-  /* ---------- Generated card art ---------- */
-  const ART = {
-    chat: `<g fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="200" cy="112" r="26" fill="currentColor" fill-opacity=".18"><animate attributeName="r" values="24;30;24" dur="3s" repeatCount="indefinite"/></circle><circle cx="200" cy="112" r="10" fill="currentColor"/>
-      ${[[80,50],[320,50],[70,170],[330,170],[200,30]].map(([x,y],i)=>`<line x1="200" y1="112" x2="${x}" y2="${y}" stroke-dasharray="4 5" opacity=".6"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="${1.2+i*.2}s" repeatCount="indefinite"/></line><rect x="${x-34}" y="${y-14}" width="68" height="28" rx="14" fill="currentColor" fill-opacity=".12"/>`).join("")}
-      </g><g font-family="JetBrains Mono,monospace" font-size="10" fill="currentColor" text-anchor="middle">
-      <text x="80" y="54">LEADS</text><text x="320" y="54">SALES</text><text x="70" y="174">HR</text><text x="330" y="174">FINANCE</text><text x="200" y="34">CHAT</text></g>`,
-    bars: (() => { let s = ""; const v = [.92,.84,.8,.74,.7,.63,.58,.5,.44,.38]; v.forEach((h,i)=>{ const x=40+i*33, bh=h*150; s+=`<rect x="${x}" y="${190-bh}" width="22" height="${bh}" rx="4" fill="currentColor" fill-opacity="${i===0?.95:.25+h*.35}"><animate attributeName="height" from="0" to="${bh}" dur=".9s" begin="${i*.06}s" fill="freeze"/><animate attributeName="y" from="190" to="${190-bh}" dur=".9s" begin="${i*.06}s" fill="freeze"/></rect>`;}); return s + `<line x1="30" y1="190" x2="372" y2="190" stroke="currentColor" opacity=".4"/><text x="40" y="30" font-family="JetBrains Mono,monospace" font-size="11" fill="currentColor">WIN · TIE · LOSS  —  80+ MODELS</text>`; })(),
-    court: `<g fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7"><rect x="40" y="30" width="320" height="165" rx="6"/><line x1="200" y1="30" x2="200" y2="195"/><circle cx="200" cy="112" r="28"/><path d="M40 70 h50 v85 h-50"/><path d="M360 70 h-50 v85 h50"/><path d="M90 50 a75 75 0 0 1 0 125" /><path d="M310 50 a75 75 0 0 0 0 125"/></g>
-      ${[[130,80],[160,140],[250,95],[280,150],[220,60]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="6" fill="currentColor"><animate attributeName="r" values="5;9;5" dur="2s" begin="${i*.3}s" repeatCount="indefinite"/></circle>`).join("")}
-      <polyline points="130,80 160,140 250,95 280,150" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"><animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1s" repeatCount="indefinite"/></polyline>`,
-    dash: `<g fill="currentColor">${[0,1,2].map(i=>`<rect x="${40+i*110}" y="30" width="96" height="44" rx="8" fill-opacity=".14"/><rect x="${52+i*110}" y="42" width="40" height="6" rx="3" fill-opacity=".5"/><rect x="${52+i*110}" y="54" width="60" height="10" rx="3" fill-opacity=".9"/>`).join("")}<rect x="40" y="88" width="206" height="110" rx="8" fill-opacity=".1"/><rect x="258" y="88" width="102" height="110" rx="8" fill-opacity=".1"/></g>
-      <polyline points="52,180 80,160 108,168 136,130 164,140 192,110 232,100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="260" stroke-dashoffset="260"><animate attributeName="stroke-dashoffset" from="260" to="0" dur="2s" fill="freeze"/></polyline><circle cx="309" cy="143" r="34" fill="none" stroke="currentColor" stroke-width="10" stroke-dasharray="150 214" opacity=".9"/>`,
-    cart: `<g fill="none" stroke="currentColor" stroke-width="1.5">${[0,1,2].map(i=>`<rect x="${40+i*112}" y="40" width="96" height="120" rx="10" fill="currentColor" fill-opacity="${i===1?.22:.1}"/><rect x="${52+i*112}" y="52" width="72" height="42" rx="6" fill="currentColor" fill-opacity=".25" stroke="none"/>`).join("")}</g>
-      <g font-family="JetBrains Mono,monospace" font-size="11" fill="currentColor"><text x="52" y="116">Ice rink</text><text x="52" y="140">€6.00</text><text x="164" y="116">AI Bundle</text><text x="164" y="140">€25 → €20</text><text x="276" y="116">Ferris</text><text x="276" y="140">€8.00</text></g>
-      <rect x="152" y="172" width="96" height="26" rx="13" fill="currentColor"/><text x="200" y="189" font-family="JetBrains Mono,monospace" font-size="11" text-anchor="middle" fill="#05060b">✦ suggested</text>`,
-    pipe: `<g fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="80" cy="70" rx="40" ry="12"/><path d="M40 70v80c0 7 18 12 40 12s40-5 40-12V70"/><ellipse cx="80" cy="110" rx="40" ry="12" opacity=".4"/>
-      <path d="M130 112h140" stroke-dasharray="6 6"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1s" repeatCount="indefinite"/></path><path d="M262 104l10 8-10 8"/></g>
-      ${Array.from({length:16},(_,i)=>`<circle cx="${290+(i%4)*22}" cy="${70+Math.floor(i/4)*22}" r="5" fill="currentColor" fill-opacity="${.3+(i%3)*.25}"><animate attributeName="fill-opacity" values="${.3+(i%3)*.25};1;${.3+(i%3)*.25}" dur="2.4s" begin="${i*.15}s" repeatCount="indefinite"/></circle>`).join("")}
-      <g font-family="JetBrains Mono,monospace" font-size="10" fill="currentColor"><text x="52" y="190">POSTGRES</text><text x="168" y="100">snapshot · dedupe</text><text x="296" y="190">PINECONE</text></g>`,
-    leaf: `<path d="M200 40c70 10 110 60 90 130-70 0-120-40-120-100 0-10 10-25 30-30z" fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="1.5"><animateTransform attributeName="transform" type="rotate" values="-3 200 110;3 200 110;-3 200 110" dur="5s" repeatCount="indefinite"/></path><path d="M175 185c20-50 50-90 100-120" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="60" y="190" font-family="JetBrains Mono,monospace" font-size="12" fill="currentColor">CO₂e · XGBoost</text>`,
-    chart: `<polyline points="40,170 80,150 120,158 160,120 200,128 240,92 280,100" fill="none" stroke="currentColor" stroke-width="2.5"/><polyline points="280,100 320,74 360,60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="6 6"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite"/></polyline><path d="M280 100 L320 60 L360 40 L360 84 L320 92 Z" fill="currentColor" fill-opacity=".15"/><line x1="280" y1="30" x2="280" y2="195" stroke="currentColor" opacity=".3"/><text x="290" y="190" font-family="JetBrains Mono,monospace" font-size="11" fill="currentColor">forecast 96.7%</text>`,
-    route: `<path d="M60 170 C 120 60, 200 200, 260 90 S 330 60, 350 50" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="8 6"><animate attributeName="stroke-dashoffset" from="0" to="-28" dur="1.4s" repeatCount="indefinite"/></path><circle cx="60" cy="170" r="8" fill="currentColor"/><circle cx="350" cy="50" r="8" fill="currentColor"/><rect x="230" y="140" width="120" height="40" rx="10" fill="currentColor" fill-opacity=".15"/><text x="244" y="165" font-family="JetBrains Mono,monospace" font-size="12" fill="currentColor">est. fare ✓</text>`,
-  };
+  /* ---------- Card visuals (see mockups.js) ---------- */
   const visual = p => `
     <div class="grid-lines"></div>
-    <svg class="art" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${ART[p.art] || ""}</svg>
+    <div class="mock-wrap">${window.MOCKUPS.render(p)}</div>
     ${p.shot ? `<img class="shot" src="${p.shot}" alt="${p.title} screenshot" loading="lazy" onerror="this.remove()">` : ""}`;
 
   /* ---------- Render projects ---------- */
@@ -285,6 +262,7 @@
         <span class="card-tag">${p.tagline}</span>
         <h3>${p.title}</h3>
         <p>${p.summary}</p>
+        <ul class="card-impact">${p.impact.slice(0, 2).map(i => `<li>${i}</li>`).join("")}</ul>
         <div class="card-foot">
           <div class="mini-stack">${p.stack.slice(0, 4).map(s => `<span>${s}</span>`).join("")}</div>
           <span class="arrow">${arrowSvg}</span>

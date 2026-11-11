@@ -3,7 +3,8 @@
    - cat:    one or more of  agents | llm | commerce | data | ml
    - shot:   optional screenshot path (e.g. "assets/shots/agentwiz.webp").
              If the file is missing the card falls back to generated art.
-   - art:    which generated visual to draw: chat | bars | court | dash | cart | pipe | leaf | chart | route
+   - visual: each card's product mockup is drawn in mockups.js, keyed by the project id.
+             A new project needs a matching entry there (or it shows only the backdrop).
    - accent: card accent colour
    ========================================================================= */
 window.PROJECTS = [
@@ -14,7 +15,6 @@ window.PROJECTS = [
     cat: ["agents"],
     featured: true,
     accent: "#7cf4c8",
-    art: "chat",
     shot: "assets/shots/agentwiz.webp",
     links: [{ label: "Live app", url: "https://agentwiz.thefabulousshow.com/" }],
     summary:
@@ -38,7 +38,6 @@ window.PROJECTS = [
     cat: ["llm", "data"],
     featured: true,
     accent: "#8b9bff",
-    art: "bars",
     shot: "assets/shots/modellab.webp",
     links: [{ label: "Live app", url: "https://modellab.ballogy.com/" }],
     summary:
@@ -62,7 +61,6 @@ window.PROJECTS = [
     cat: ["agents", "ml"],
     featured: true,
     accent: "#ffb86b",
-    art: "court",
     shot: "assets/shots/camphq.webp",
     links: [
       { label: "Camp HQ", url: "https://www.ballogy.com/camp-hq" },
@@ -88,7 +86,6 @@ window.PROJECTS = [
     cat: ["commerce"],
     featured: true,
     accent: "#ff7a9c",
-    art: "cart",
     shot: "assets/shots/trichter.webp",
     links: [
       { label: "Webshop", url: "https://shop.trichter.nl/nl" },
@@ -113,7 +110,6 @@ window.PROJECTS = [
     tagline: "Executive analytics dashboard",
     cat: ["data"],
     accent: "#5ad1ff",
-    art: "dash",
     shot: "assets/shots/insight.webp",
     links: [{ label: "Live dashboard", url: "https://ballogy-insight-hub.lovable.app/executive" }],
     summary:
@@ -133,7 +129,6 @@ window.PROJECTS = [
     tagline: "Keeps vector search current with no CDC vendor",
     cat: ["llm", "data"],
     accent: "#b18cff",
-    art: "pipe",
     links: [],
     summary:
       "A Python worker that takes snapshots of PostgreSQL and syncs the changes into Pinecone with de-duplication. It replaces paid tools such as Estuary.",
@@ -152,7 +147,6 @@ window.PROJECTS = [
     tagline: "XGBoost carbon emission estimates",
     cat: ["ml"],
     accent: "#6be58a",
-    art: "leaf",
     shot: "assets/shots/yinn.webp",
     links: [{ label: "Yinn.ca", url: "https://yinn.ca/" }],
     summary: "An AI carbon emission calculator built with XGBoost and integrated into the Yinn.ca platform.",
@@ -171,7 +165,6 @@ window.PROJECTS = [
     tagline: "AI for financial health and forecasting",
     cat: ["ml"],
     accent: "#ffd166",
-    art: "chart",
     shot: "assets/shots/finhealer.webp",
     links: [{ label: "finhealer.com", url: "https://finhealer.com/" }],
     summary:
@@ -191,7 +184,6 @@ window.PROJECTS = [
     tagline: "Real-time trip pricing for 500+ users a month",
     cat: ["ml"],
     accent: "#4fd1c5",
-    art: "route",
     links: [],
     summary:
       "Vehicle travel cost prediction using a Random Forest model (R² 0.86–0.87), with Google Places for live distances and FastAPI with PostgreSQL behind it.",
@@ -210,7 +202,6 @@ window.PROJECTS = [
     tagline: "Retrieval-augmented generation and multilingual output",
     cat: ["llm"],
     accent: "#f78fb3",
-    art: "chat",
     links: [],
     summary:
       "A RAG system built on Llama 3.2 that made retrieval and generation 40% more efficient, plus a low-latency multi-language translation model.",

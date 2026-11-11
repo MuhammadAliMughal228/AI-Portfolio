@@ -16,6 +16,13 @@
   --brand: var(--a1);
   --ink: #05060b;
   --on-grad: #05060b;
+  --mock-bg: #0d0f1b;
+  --mock-card: rgba(255, 255, 255, 0.035);
+  --mock-field: rgba(255, 255, 255, 0.05);
+  --mock-gray: rgba(255, 255, 255, 0.08);
+  --mock-mid: rgba(255, 255, 255, 0.28);
+  --mock-map: #11141f;
+  --mock-road: rgba(255, 255, 255, 0.05);
   --grad: linear-gradient(110deg, var(--a1) 0%, var(--a2) 50%, var(--a3) 100%);
   --shadow: 0 40px 100px -40px rgba(0, 0, 0, 0.8);
   --radius: 24px;
@@ -44,6 +51,13 @@
   --a3: #db2777;
   --ink: #ffffff;
   --on-grad: #ffffff;
+  --mock-bg: #ffffff;
+  --mock-card: #f7f7fc;
+  --mock-field: #f1f2f8;
+  --mock-gray: rgba(20, 22, 50, 0.08);
+  --mock-mid: rgba(20, 22, 50, 0.3);
+  --mock-map: #eef1f6;
+  --mock-road: rgba(255, 255, 255, 0.95);
   --shadow: 0 40px 80px -40px rgba(40, 30, 90, 0.3);
   color-scheme: light;
 }
@@ -348,14 +362,95 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; margin: 0; letter-s
 .card:hover { box-shadow: 0 30px 80px -40px color-mix(in srgb, var(--accent) 60%, transparent); }
 .card.hide { display: none; }
 .card-visual {
-  position: relative; aspect-ratio: 16/9; overflow: hidden; color: var(--accent);
-  background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%), var(--bg-2);
+  position: relative; aspect-ratio: 16/10; overflow: hidden; color: var(--accent);
+  background:
+    radial-gradient(80% 70% at 50% 110%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%),
+    radial-gradient(60% 60% at 0% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+    var(--bg-2);
   border-bottom: 1px solid var(--border);
 }
-.grid-lines { position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(circle at 50% 40%, #000, transparent 75%); -webkit-mask-image: radial-gradient(circle at 50% 40%, #000, transparent 75%); }
-.art { position: absolute; inset: 6% 4%; width: 92%; height: 88%; transition: transform .8s var(--ease); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 45%, transparent)); }
-.card:hover .art { transform: scale(1.06); }
+.grid-lines { position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(circle at 50% 30%, #000, transparent 70%); -webkit-mask-image: radial-gradient(circle at 50% 30%, #000, transparent 70%); }
+.mock-wrap { position: absolute; left: 5%; right: 5%; top: 13%; perspective: 1200px; }
+.mock {
+  display: block; width: 100%; height: auto; overflow: visible;
+  transform: rotateX(7deg) scale(.97); transform-origin: 50% 100%;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .45)) drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 18%, transparent));
+  transition: transform .8s var(--ease);
+}
+.card:hover .mock { transform: rotateX(0) scale(1) translateY(-4px); }
+.modal-hero .mock-wrap { top: 9%; bottom: 5%; left: 4%; right: 4%; }
+.modal-hero .mock { height: 100%; transform: none; }
 .shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* ----- mockup primitives (SVG) ----- */
+.mock text { font-family: var(--font); fill: var(--muted); }
+.m-win { fill: var(--mock-bg); stroke: var(--border-strong); stroke-width: .7; }
+.m-card { fill: var(--mock-card); stroke: var(--border); stroke-width: .6; }
+.m-field { fill: var(--mock-field); stroke: var(--border); stroke-width: .6; }
+.m-sep { stroke: var(--border); stroke-width: .7; }
+.m-grid { stroke: var(--border); stroke-width: .6; fill: none; }
+.m-gridpoly { fill: none; stroke: var(--border-strong); stroke-width: .6; }
+.m-gray { fill: var(--mock-gray); }
+.m-gray-dot { fill: var(--faint); }
+.m-gray-stroke { stroke: var(--mock-gray); }
+.m-mid { fill: var(--mock-mid); }
+.mock .m-title { font: 500 7.5px var(--mono); fill: var(--faint); }
+.mock .m-h { font-size: 8.4px; font-weight: 600; fill: var(--text); }
+.mock .m-s { font-size: 7.4px; fill: var(--muted); }
+.mock .m-tx { fill: var(--text); }
+.mock .m-xs { font-size: 6.4px; fill: var(--faint); }
+.mock .m-strong { fill: var(--text); font-weight: 600; }
+.mock .m-big { font: 700 21px var(--display); letter-spacing: -.6px; fill: var(--text); }
+.mock .m-mono { font-family: var(--mono); }
+.mock .m-strike { text-decoration: line-through; }
+.mock .m-cite { fill: currentColor; font-weight: 600; }
+.mock .m-btn { font-size: 8px; font-weight: 700; fill: #05060b; }
+.mock .m-on-ac { fill: #05060b; }
+.m-on-ac-stroke { stroke: #05060b; }
+.mock .m-snow { font-size: 9px; fill: currentColor; opacity: .7; animation: snow 3s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.m-ac { fill: currentColor; }
+.m-acs { stroke: currentColor; fill: none; }
+.m-line { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.m-dash { stroke-dasharray: 4 3; }
+.m-prev { fill: none; stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.m-target { fill: none; stroke: var(--text); stroke-opacity: .55; stroke-width: 1; stroke-dasharray: 3 2.5; }
+.m-today { stroke: var(--text); stroke-opacity: .4; stroke-width: .8; stroke-dasharray: 2 2; }
+.m-map { fill: var(--mock-map); stroke: var(--border); stroke-width: .6; }
+.m-road { stroke: var(--mock-road); stroke-width: 3; }
+.m-river { fill: none; stroke: #38bdf8; stroke-opacity: .28; stroke-width: 9; stroke-linecap: round; }
+.m-park { fill: #34d399; fill-opacity: .14; }
+.m-route-bg { fill: none; stroke: currentColor; stroke-opacity: .2; stroke-width: 6; stroke-linecap: round; }
+.m-car { fill: var(--text); stroke: currentColor; stroke-width: 1.6; }
+.m-pin-in { fill: var(--mock-bg); }
+.m-label { fill: var(--mock-bg); stroke: var(--border-strong); stroke-width: .6; }
+
+/* ----- mockup motion (runs once the card scrolls in) ----- */
+.m-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.m-grow, .m-growx, .m-pop { transform-box: fill-box; }
+.m-grow { transform-origin: 50% 100%; transform: scaleY(0); }
+.m-growx { transform-origin: 0 50%; transform: scaleX(0); }
+.m-pop { transform-origin: 50% 50%; transform: scale(0); }
+.m-fade { opacity: 0; }
+.m-gauge { stroke-dashoffset: var(--len); }
+.card.in .m-draw, .modal-hero .m-draw { animation: mDraw 1.8s var(--ease) .35s forwards; }
+.card.in .m-grow, .card.in .m-growx, .card.in .m-pop,
+.modal-hero .m-grow, .modal-hero .m-growx, .modal-hero .m-pop { animation: mGrow .9s var(--ease) forwards; animation-delay: calc(var(--d, 0s) + .3s); }
+.card.in .m-fade, .modal-hero .m-fade { animation: mFade 1.2s ease .9s forwards; }
+.card.in .m-gauge, .modal-hero .m-gauge { animation: mGauge 1.6s var(--ease) .4s forwards; }
+.m-ping { transform-box: fill-box; transform-origin: 50% 50%; opacity: .35; animation: mPing 2s ease-out infinite; }
+.m-spin { animation: mSpin 9s linear infinite; }
+.m-blink { animation: mBlink 2.4s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.m-typing { transform-box: fill-box; transform-origin: 50% 50%; animation: mType 1.2s ease-in-out infinite; animation-delay: var(--d, 0s); }
+@keyframes mDraw { to { stroke-dashoffset: 0; } }
+@keyframes mGrow { to { transform: none; } }
+@keyframes mFade { to { opacity: 1; } }
+@keyframes mGauge { to { stroke-dashoffset: var(--val); } }
+@keyframes mPing { 0% { transform: scale(.4); opacity: .5; } 100% { transform: scale(1.4); opacity: 0; } }
+@keyframes mSpin { to { transform: rotate(360deg); } }
+@keyframes mBlink { 50% { fill-opacity: 1; } }
+@keyframes mType { 0%, 60%, 100% { transform: none; opacity: .4; } 30% { transform: translateY(-2.5px); opacity: 1; } }
+@keyframes snow { 50% { transform: translateY(3px); opacity: 1; } }
+
 .badge-live {
   position: absolute; top: 14px; left: 14px; z-index: 3; display: inline-flex; align-items: center; gap: 6px;
   padding: 4px 10px; border-radius: 999px; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase;
@@ -363,9 +458,12 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; margin: 0; letter-s
 }
 .badge-live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #34d399; animation: pulse 2s infinite; }
 .card-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.card-tag { font: 500 12px var(--mono); color: var(--accent); letter-spacing: .02em; }
+.card-tag { font: 500 12px var(--mono); color: color-mix(in srgb, var(--accent) 80%, var(--text)); letter-spacing: .02em; }
 .card h3 { font-size: 22px; font-weight: 700; }
 .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.card-impact { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.card-impact li { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text); }
+.card-impact li::before { content: ""; width: 15px; height: 15px; flex: none; border-radius: 50%; background: color-mix(in srgb, var(--accent) 85%, var(--bg)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat; }
 .card-foot { margin-top: auto; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .mini-stack { display: flex; flex-wrap: wrap; gap: 6px; }
 .mini-stack span { padding: 3px 10px; border-radius: 999px; font: 400 11.5px var(--mono); color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
@@ -451,7 +549,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.08; margin: 0; letter-s
 .modal::backdrop { background: rgba(3, 4, 10, .7); backdrop-filter: blur(8px); }
 @keyframes modalIn { from { opacity: 0; transform: translateY(30px) scale(.96); } }
 .modal-close { position: sticky; top: 14px; float: right; margin: 14px 14px 0 0; z-index: 5; background: var(--glass); backdrop-filter: blur(10px); }
-.modal-hero { position: relative; aspect-ratio: 21/9; color: var(--accent); background: radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 70%), var(--bg); border-bottom: 1px solid var(--border); overflow: hidden; }
+.modal-hero { position: relative; aspect-ratio: 16/8; color: var(--accent); background: radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 70%), var(--bg); border-bottom: 1px solid var(--border); overflow: hidden; }
 .modal-content { padding: 32px clamp(20px, 5vw, 48px) 44px; }
 .modal-content h2 { font-size: clamp(28px, 4vw, 40px); margin: 10px 0 14px; }
 .modal-content > p { color: var(--muted); margin: 0 0 8px; }
